@@ -36,7 +36,7 @@ namespace DetailingCenterDbLib
                 $"CREATE TABLE IF NOT EXISTS {tableName} (" +
                     "SqlId              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "Name               TEXT NOT NULL," +
-                    "Surname            TEXT NOT NULL," +
+                    "Surname            TEXT NOT NULL" +
                     "); " +
                 $"INSERT INTO {tableName} (Name, Surname) " +
                 $"VALUES (@Name, @Surname);",
