@@ -1,10 +1,10 @@
 namespace WinFormsApp1
 {
-    public partial class Employee : Form
+    public partial class EmployeeForm : Form
     {
         private string[] _restrictedChars = new string[] { "+", "=" };
 
-        public Employee()
+        public EmployeeForm()
         {
             InitializeComponent();
         }

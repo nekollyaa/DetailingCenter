@@ -1,8 +1,8 @@
 ﻿namespace WinFormsApp1
 {
-    public partial class Сlientele : Form
+    public partial class СlienteleForm : Form
     {
-        public Сlientele()
+        public СlienteleForm()
         {
             InitializeComponent();
         }

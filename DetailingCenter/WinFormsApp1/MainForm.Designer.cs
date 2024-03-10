@@ -86,6 +86,7 @@
             buttonEmployee.TabIndex = 4;
             buttonEmployee.Text = "Сотрудники";
             buttonEmployee.UseVisualStyleBackColor = true;
+            buttonEmployee.Click += buttonEmployee_Click;
             // 
             // buttonSuppliers
             // 

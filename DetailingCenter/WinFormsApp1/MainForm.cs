@@ -21,5 +21,11 @@ namespace WinFormsApp1
         {
 
         }
+
+        private void buttonEmployee_Click(object sender, EventArgs e)
+        {
+            EmployeeForm employee = new EmployeeForm();
+            employee.Show();
+        }
     }
 }

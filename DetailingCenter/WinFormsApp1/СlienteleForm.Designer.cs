@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Сlientele
+    partial class СlienteleForm
     {
         /// <summary>
         /// Required designer variable.

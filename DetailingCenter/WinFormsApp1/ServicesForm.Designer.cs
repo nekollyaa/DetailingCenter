@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Services
+    partial class ServicesForm
     {
         /// <summary>
         /// Required designer variable.
