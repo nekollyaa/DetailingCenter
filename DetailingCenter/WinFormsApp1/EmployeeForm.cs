@@ -29,8 +29,8 @@ namespace WinFormsApp1
                 textBoxEmployeeLastName.Text = "";
                 textBoxEmployeePatronymic.Text = "";
                 textBoxEmployeePhone.Text = "";
-                comboBoxEmployeeEducation.Text = "";
-                comboBoxEmployeePosition.Text = "";
+                comboBoxEmployeeEducation.SelectedItem = null;
+                comboBoxEmployeePosition.SelectedItem = null;
                 textBoxEmployeeSalary.Text = "";
                 return;
             }
