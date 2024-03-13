@@ -13,5 +13,4 @@ namespace DetailingCenterDbLib
         public string Surname { get; init; }
 
     }
-    
 }

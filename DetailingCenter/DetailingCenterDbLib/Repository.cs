@@ -12,6 +12,7 @@ namespace DetailingCenterDbLib
     public class Repository
     {
         private readonly IDbConnection _db;
+        private const string TableName = "Employees";
 
         public Repository()
         {
@@ -31,16 +32,33 @@ namespace DetailingCenterDbLib
         }
         public void SaveEmployee(Employee employee)
         {
-            string tableName = "Employees";
             _db.Execute(
-                $"CREATE TABLE IF NOT EXISTS {tableName} (" +
+                $"CREATE TABLE IF NOT EXISTS {TableName} (" +
                     "SqlId              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "Name               TEXT NOT NULL," +
                     "Surname            TEXT NOT NULL" +
                     "); " +
-                $"INSERT INTO {tableName} (Name, Surname) " +
+                $"INSERT INTO {TableName} (Name, Surname) " +
                 $"VALUES (@Name, @Surname);",
                 employee);
+        }
+        
+        public bool TryGetEmployees(out Employee[] employees)
+        {
+            try
+            {
+                employees = _db
+                    .Query<Employee>($"SELECT SqlId, Name, Surname" +
+                        $" FROM {TableName}")
+                    .ToArray();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                employees = new Employee[0];
+                Console.WriteLine($"Какая то ошибка!{ex.Message} {ex.StackTrace}");
+                return false;
+            }
         }
     }
     
