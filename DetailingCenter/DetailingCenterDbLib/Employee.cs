@@ -11,6 +11,10 @@ namespace DetailingCenterDbLib
         public long? SqlId { get; init; }
         public string Name { get; init; }
         public string Surname { get; init; }
-
+        public string Patronymic { get; init; }
+        public string Phone { get; init; }
+        public string Education { get; init; }
+        public string Position { get; init; }
+        public string Salary { get; init; }
     }
 }

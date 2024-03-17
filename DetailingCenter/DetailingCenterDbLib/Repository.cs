@@ -36,10 +36,15 @@ namespace DetailingCenterDbLib
                 $"CREATE TABLE IF NOT EXISTS {TableName} (" +
                     "SqlId              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "Name               TEXT NOT NULL," +
-                    "Surname            TEXT NOT NULL" +
+                    "Surname            TEXT NOT NULL," +
+                    "Patronymic         TEXT NOT NULL," +
+                    "Phone              TEXT NOT NULL," +
+                    "Education          TEXT NOT NULL," +
+                    "Position           TEXT NOT NULL," +
+                    "Salary             TEXT NOT NULL" +
                     "); " +
-                $"INSERT INTO {TableName} (Name, Surname) " +
-                $"VALUES (@Name, @Surname);",
+                $"INSERT INTO {TableName} (Name, Surname, Patronymic, Phone, Education, Position, Salary) " +
+                $"VALUES (@Name, @Surname, @Patronymic, @Phone, @Education, @Position, @Salary);",
                 employee);
         }
         
@@ -48,7 +53,7 @@ namespace DetailingCenterDbLib
             try
             {
                 employees = _db
-                    .Query<Employee>($"SELECT SqlId, Name, Surname" +
+                    .Query<Employee>($"SELECT SqlId, Name, Surname, Patronymic, Phone, Education, Position, Salary" +
                         $" FROM {TableName}")
                     .ToArray();
                 return true;
