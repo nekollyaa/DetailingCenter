@@ -1,8 +1,11 @@
+using DetailingCenterDbLib;
+
 namespace WinFormsApp1
 {
     public partial class EmployeeForm : Form
     {
         private string[] _restrictedChars = new string[] { "+", "=" };
+        private readonly Repository _repository = new Repository();
 
         public EmployeeForm()
         {
@@ -10,6 +13,33 @@ namespace WinFormsApp1
         }
 
         private void addEmployee_Click(object sender, EventArgs e)
+        {
+            if (TryGetEmployeeFromUI(out Employee employee))
+            {
+                SetDefaultValues();
+                _repository.SaveEmployee(employee);
+                ShowEmployees();
+                return;
+            }
+            SetError();
+        }
+
+        private void ShowEmployees()
+        {
+            textBoxListOfEmployees.Text = "";
+            bool isSuccess = _repository.TryGetEmployees(out Employee[] employees);
+            if (isSuccess)
+            {
+                for (int i = 0; i<employees.Length; i++)
+                {
+                    Employee employee = employees[i];
+                    textBoxListOfEmployees.Text += $"\r\n {employee.Name} {employee.Surname} {employee.Patronymic} {employee.Phone}" +
+                    $"{employee.Education} {employee.Position} {employee.Salary}";
+                }
+            }
+        }
+
+        private bool TryGetEmployeeFromUI(out Employee employee)
         {
             bool isNameCorrect = TryGetEmployeeName(out string firstName);
             bool isLastNameCorrect = TryGetEmployeeLastName(out string lastName);
@@ -21,19 +51,37 @@ namespace WinFormsApp1
             if (isNameCorrect && isLastNameCorrect && isPatronymicCorrect && isPhoneCorrect
                 && isEducationCorrect && isPositionCorrect && isSalaryCorrect)
             {
-                textBoxListOfEmployees.Text += $"\r\n {firstName} {lastName} {patronymic} {phone}" +
-                    $"{education} {position} {salary}";
-                labelError.ForeColor = Color.WhiteSmoke;
-                labelError.BackColor = Color.WhiteSmoke;
-                textBoxEmployeeFirstName.Text = "";
-                textBoxEmployeeLastName.Text = "";
-                textBoxEmployeePatronymic.Text = "";
-                textBoxEmployeePhone.Text = "";
-                comboBoxEmployeeEducation.SelectedItem = null;
-                comboBoxEmployeePosition.SelectedItem = null;
-                textBoxEmployeeSalary.Text = "";
-                return;
+                employee = new Employee()
+                {
+                    Name = firstName,
+                    Surname = lastName,
+                    Patronymic = patronymic,
+                    Phone = phone,
+                    Education = education,
+                    Position = position,
+                    Salary = salary
+                };
+                return true;
             }
+            employee = new Employee();
+            return false;
+        }
+
+        private void SetDefaultValues()
+        {
+            labelError.ForeColor = Color.WhiteSmoke;
+            labelError.BackColor = Color.WhiteSmoke;
+            textBoxEmployeeFirstName.Text = "";
+            textBoxEmployeeLastName.Text = "";
+            textBoxEmployeePatronymic.Text = "";
+            textBoxEmployeePhone.Text = "";
+            comboBoxEmployeeEducation.SelectedItem = null;
+            comboBoxEmployeePosition.SelectedItem = null;
+            textBoxEmployeeSalary.Text = "";
+        }
+
+        private void SetError()
+        {
             labelError.BackColor = Color.Red;
             labelError.ForeColor = Color.Black;
         }
