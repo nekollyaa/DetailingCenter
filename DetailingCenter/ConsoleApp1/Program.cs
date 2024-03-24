@@ -16,6 +16,8 @@ Employee employee = new Employee()
 };
 Repository repository = new Repository();
 repository.SaveEmployee(employee);
-bool isSuccess = repository.TryGetEmployees(out Employee[] employees);
+bool isSuccess = repository.TryGetEmployeesFromDB(out Employee[] employees);
+
+repository.DeleteEmployee(employees[1]);
 
 Console.WriteLine("Hello, World!");

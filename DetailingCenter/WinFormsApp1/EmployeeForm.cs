@@ -10,6 +10,17 @@ namespace WinFormsApp1
         public EmployeeForm()
         {
             InitializeComponent();
+            _repository.EmployeeTableWasChanged += OnEmployeeTableWasChanged;
+            if (_repository.TryGetEmployeesFromDB(out Employee[] employees))
+                ShowEmployees(employees);
+        }
+
+        public void OnEmployeeTableWasChanged(object sender, Employee[] employees)
+        {
+            if (employees is null)
+                return;
+
+            ShowEmployees(employees);
         }
 
         private void addEmployee_Click(object sender, EventArgs e)
@@ -18,24 +29,19 @@ namespace WinFormsApp1
             {
                 SetDefaultValues();
                 _repository.SaveEmployee(employee);
-                ShowEmployees();
                 return;
             }
             SetError();
         }
 
-        private void ShowEmployees()
+        private void ShowEmployees(Employee[] employees)
         {
             textBoxListOfEmployees.Text = "";
-            bool isSuccess = _repository.TryGetEmployees(out Employee[] employees);
-            if (isSuccess)
+            for (int i = 0; i < employees.Length; i++)
             {
-                for (int i = 0; i<employees.Length; i++)
-                {
-                    Employee employee = employees[i];
-                    textBoxListOfEmployees.Text += $"\r\n {employee.Name} {employee.Surname} {employee.Patronymic} {employee.Phone}" +
-                    $"{employee.Education} {employee.Position} {employee.Salary}";
-                }
+                Employee employee = employees[i];
+                textBoxListOfEmployees.Text += $"\r\n {employee.Name} {employee.Surname} {employee.Patronymic} {employee.Phone}" +
+                $"{employee.Education} {employee.Position} {employee.Salary}";
             }
         }
 
@@ -168,6 +174,5 @@ namespace WinFormsApp1
             textBoxEmployeeSalary.BackColor = Color.White;
             return true;
         }
-
     }
 }

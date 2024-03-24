@@ -49,6 +49,7 @@
             comboBoxEmployeeEducation = new ComboBox();
             label7 = new Label();
             deleteEmployee = new Button();
+            EmployeesListBox1 = new CheckedListBox();
             SuspendLayout();
             // 
             // addEmployee
@@ -255,12 +256,21 @@
             deleteEmployee.Text = "Удалить сотрудника";
             deleteEmployee.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // EmployeesListBox1
+            // 
+            EmployeesListBox1.FormattingEnabled = true;
+            EmployeesListBox1.Location = new Point(794, 12);
+            EmployeesListBox1.Name = "EmployeesListBox1";
+            EmployeesListBox1.Size = new Size(339, 418);
+            EmployeesListBox1.TabIndex = 23;
+            // 
+            // EmployeeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1150, 450);
+            Controls.Add(EmployeesListBox1);
             Controls.Add(deleteEmployee);
             Controls.Add(label7);
             Controls.Add(comboBoxEmployeeEducation);
@@ -282,7 +292,7 @@
             Controls.Add(textBoxListOfEmployees);
             Controls.Add(textBoxEmployeeFirstName);
             Controls.Add(addEmployee);
-            Name = "Form1";
+            Name = "EmployeeForm";
             Text = "Form1";
             ResumeLayout(false);
             PerformLayout();
@@ -311,5 +321,6 @@
         private ComboBox comboBoxEmployeeEducation;
         private Label label7;
         private Button deleteEmployee;
+        private CheckedListBox EmployeesListBox1;
     }
 }
