@@ -76,6 +76,7 @@
             buttoСlientele.TabIndex = 3;
             buttoСlientele.Text = "Клиенты";
             buttoСlientele.UseVisualStyleBackColor = true;
+            buttoСlientele.Click += buttoСlientele_Click;
             // 
             // buttonEmployee
             // 
